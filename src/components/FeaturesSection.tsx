@@ -1,29 +1,29 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, BookOpen, Target, Zap } from "lucide-react";
+import { Sparkles, BookOpen, Target, Upload } from "lucide-react";
 
 const features = [
   {
-    icon: Sparkles,
-    title: "AI-Powered Learning",
-    description: "Personalized content that adapts to your learning style and pace.",
+    icon: Upload,
+    title: "Upload Any PDF",
+    description: "Drop your textbook, article, or any PDF - we'll transform it into engaging content.",
     color: "coral"
   },
   {
-    icon: BookOpen,
-    title: "Interactive Content",
-    description: "Transform static textbooks into engaging, interactive experiences.",
+    icon: Sparkles,
+    title: "AI-Personalized",
+    description: "Content adapts to your interests, making complex topics relatable and fun.",
     color: "peach"
   },
   {
-    icon: Target,
-    title: "Goal-Oriented",
-    description: "Track your progress and achieve your learning goals effectively.",
+    icon: BookOpen,
+    title: "Custom Books",
+    description: "Get a beautifully structured book with chapters tailored just for you.",
     color: "coral"
   },
   {
-    icon: Zap,
-    title: "Instant Feedback",
-    description: "Get real-time feedback and explanations as you learn.",
+    icon: Target,
+    title: "Learn Your Way",
+    description: "Whether you love sports, gaming, or cooking - learn through what you love.",
     color: "peach"
   },
 ];
@@ -38,11 +38,11 @@ const FeaturesSection = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16 animate-slide-up">
           <h2 className="text-4xl lg:text-5xl font-display font-medium mb-4">
-            Why Learn Your Way?
+            Why Book Buddy?
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Discover how we're revolutionizing education with cutting-edge technology 
-            and personalized learning experiences.
+            Experience learning that actually connects with you. Your interests 
+            become the lens through which you understand new concepts.
           </p>
         </div>
 

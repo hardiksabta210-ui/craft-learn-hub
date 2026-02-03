@@ -1,8 +1,20 @@
-import { Play } from "lucide-react";
+import { Play, Upload, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import InterestPicker from "./InterestPicker";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  selectedInterests: string[];
+  onInterestsChange: (interests: string[]) => void;
+  onUploadClick: () => void;
+  onTryNowClick: () => void;
+}
+
+const HeroSection = ({ 
+  selectedInterests, 
+  onInterestsChange, 
+  onUploadClick,
+  onTryNowClick 
+}: HeroSectionProps) => {
   return (
     <section className="relative min-h-screen overflow-hidden">
       {/* Animated Background Blobs */}
@@ -27,23 +39,26 @@ const HeroSection = () => {
           <div className="space-y-8 animate-slide-in-left">
             {/* Logo/Title */}
             <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-coral/20 flex items-center justify-center">
+                <BookOpen className="w-5 h-5 text-coral" />
+              </div>
               <h1 className="text-2xl font-display font-medium tracking-tight">
-                Learn Your Way
+                Book Buddy
               </h1>
               <span className="px-3 py-1 text-xs font-medium border border-muted-foreground/30 rounded-full">
-                EXPERIMENT
+                AI POWERED
               </span>
             </div>
 
             {/* Main Heading */}
             <h2 className="text-5xl lg:text-6xl xl:text-7xl font-display font-medium leading-tight italic">
-              Re-imagining textbooks for every learner
+              Transform PDFs into personalized learning
             </h2>
 
             {/* Description */}
             <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-              Learn Your Way transforms content into a dynamic and engaging learning 
-              experience tailored for you.
+              Book Buddy takes your content and creates a custom book tailored 
+              to your interests. Learn any subject, your way.
             </p>
 
             {/* CTA Button */}
@@ -58,16 +73,20 @@ const HeroSection = () => {
             <div className="flex flex-wrap gap-4 pt-4">
               <Button 
                 size="lg" 
+                onClick={onUploadClick}
                 className="bg-coral hover:bg-coral/90 text-foreground rounded-full px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
               >
-                📋 Waitlist: Upload your PDF
+                <Upload className="w-5 h-5 mr-2" />
+                Upload your PDF
               </Button>
               <Button 
                 size="lg" 
                 variant="outline"
+                onClick={onTryNowClick}
                 className="rounded-full px-8 py-6 text-base font-medium border-2 hover:bg-accent transition-all hover:-translate-y-1"
               >
-                📖 Try it now
+                <BookOpen className="w-5 h-5 mr-2" />
+                Try it now
               </Button>
             </div>
           </div>
@@ -75,7 +94,10 @@ const HeroSection = () => {
           {/* Right Content - Interest Picker */}
           <div className="relative animate-slide-up stagger-2">
             <div className="absolute inset-0 bg-gradient-to-br from-peach/60 to-coral/40 rounded-[3rem] blur-3xl -z-10 animate-pulse-soft" />
-            <InterestPicker />
+            <InterestPicker 
+              selectedInterests={selectedInterests}
+              onInterestsChange={onInterestsChange}
+            />
           </div>
         </div>
       </div>

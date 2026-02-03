@@ -1,10 +1,17 @@
+import { BookOpen } from "lucide-react";
+
 const Footer = () => {
   return (
     <footer className="bg-foreground text-background py-16">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-12">
           <div className="space-y-4">
-            <h3 className="text-2xl font-display font-medium">Learn Your Way</h3>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-coral/20 flex items-center justify-center">
+                <BookOpen className="w-4 h-4 text-coral" />
+              </div>
+              <h3 className="text-2xl font-display font-medium">Book Buddy</h3>
+            </div>
             <p className="text-background/60 leading-relaxed">
               Transforming education through personalized, AI-powered learning experiences.
             </p>
@@ -40,7 +47,7 @@ const Footer = () => {
         
         <div className="border-t border-background/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-background/40 text-sm">
-            © 2024 Learn Your Way. All rights reserved.
+            © 2024 Book Buddy. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-background/40">
             <a href="#" className="hover:text-background transition-colors">Privacy Policy</a>

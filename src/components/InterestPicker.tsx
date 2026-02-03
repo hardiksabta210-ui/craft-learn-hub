@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Card } from "@/components/ui/card";
 
 const interests = [
@@ -21,19 +20,20 @@ const interests = [
   { emoji: "📷", label: "Photography" },
   { emoji: "🎭", label: "Theater" },
   { emoji: "🎯", label: "Darts" },
-  { emoji: "🎪", label: "Circus" },
+  { emoji: "🐕", label: "Dogs" },
 ];
 
-const InterestPicker = () => {
-  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
-  const [hoveredInterest, setHoveredInterest] = useState<string | null>(null);
+interface InterestPickerProps {
+  selectedInterests: string[];
+  onInterestsChange: (interests: string[]) => void;
+}
 
+const InterestPicker = ({ selectedInterests, onInterestsChange }: InterestPickerProps) => {
   const toggleInterest = (label: string) => {
-    setSelectedInterests(prev => 
-      prev.includes(label) 
-        ? prev.filter(i => i !== label)
-        : [...prev, label]
-    );
+    const newInterests = selectedInterests.includes(label)
+      ? selectedInterests.filter(i => i !== label)
+      : [...selectedInterests, label];
+    onInterestsChange(newInterests);
   };
 
   return (
@@ -47,10 +47,8 @@ const InterestPicker = () => {
           <button
             key={interest.label}
             onClick={() => toggleInterest(interest.label)}
-            onMouseEnter={() => setHoveredInterest(interest.label)}
-            onMouseLeave={() => setHoveredInterest(null)}
             className={`
-              emoji-button p-3 text-2xl rounded-xl transition-all duration-200 relative
+              emoji-button p-3 text-2xl rounded-xl transition-all duration-200 relative group
               ${selectedInterests.includes(interest.label) 
                 ? 'selected bg-coral-light ring-2 ring-coral scale-110' 
                 : 'hover:bg-accent'}
@@ -62,16 +60,14 @@ const InterestPicker = () => {
             }}
             title={interest.label}
           >
-            <span className={hoveredInterest === interest.label ? 'animate-wiggle inline-block' : ''}>
+            <span className={`inline-block ${selectedInterests.includes(interest.label) ? 'animate-wiggle' : 'group-hover:animate-wiggle'}`}>
               {interest.emoji}
             </span>
             
             {/* Tooltip */}
-            {hoveredInterest === interest.label && (
-              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-medium bg-foreground text-background px-2 py-1 rounded whitespace-nowrap z-10">
-                {interest.label}
-              </span>
-            )}
+            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-medium bg-foreground text-background px-2 py-1 rounded whitespace-nowrap z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+              {interest.label}
+            </span>
           </button>
         ))}
       </div>
@@ -83,7 +79,7 @@ const InterestPicker = () => {
             {selectedInterests.map(interest => (
               <span 
                 key={interest}
-                className="px-3 py-1 bg-coral/20 text-coral-foreground rounded-full text-sm font-medium animate-fade-in-scale"
+                className="px-3 py-1 bg-coral/20 text-foreground rounded-full text-sm font-medium animate-fade-in-scale"
               >
                 {interests.find(i => i.label === interest)?.emoji} {interest}
               </span>
